@@ -215,6 +215,7 @@
             display: flex;
             transition: transform 0.5s ease;
             height: 100%;
+            width: 100%;
         }
 
         .carousel-images img {
@@ -257,15 +258,15 @@
             <img src="fadhleen1.jpg" alt="Image 1">
             <img src="fadhleen2.jpg" alt="Image 2">
             <img src="fadhleen3.jpg" alt="Image 3">
-            <img src="fadhleen1.jpg" alt="Image 4">
-            <img src="fadhleen2.jpg" alt="Image 5">
-            <img src="fadhleen3.jpg" alt="Image 6">
-            <img src="fadhleen1.jpg" alt="Image 7">
-            <img src="fadhleen2.jpg" alt="Image 8">
-            <img src="fadhleen3.jpg" alt="Image 9">
-            <img src="fadhleen1.jpg" alt="Image 10">
-            <img src="fadhleen2.jpg" alt="Image 11">
-            <img src="fadhleen3.jpg" alt="Image 12">
+            <img src="fadhleen4.jpg" alt="Image 4">
+            <img src="fadhleen5.jpg" alt="Image 5">
+            <img src="fadhleen6.jpg" alt="Image 6">
+            <img src="fadhleen7.jpg" alt="Image 7">
+            <img src="fadhleen8.jpg" alt="Image 8">
+            <img src="fadhleen9.jpg" alt="Image 9">
+            <img src="fadhleen10.jpg" alt="Image 10">
+            <img src="fadhleen11.jpg" alt="Image 11">
+            <img src="fadhleen12.jpg" alt="Image 12">
         </div>
         <button class="carousel-button left">&#8249;</button>
         <button class="carousel-button right">&#8250;</button>
@@ -353,7 +354,40 @@
     const mobileInput = document.getElementById('mobile');
     const dateInput = document.getElementById('date');
     const whatsappLink = document.getElementById('whatsappLink');
+    const carouselImages = document.querySelector('.carousel-images');
+    const leftButton = document.querySelector('.carousel-button.left');
+    const rightButton = document.querySelector('.carousel-button.right');
+    let index = 0;
 
+    function updateCarousel() {
+        const totalImages = document.querySelectorAll('.carousel-images img').length;
+        const width = document.querySelector('.carousel-container').offsetWidth;
+        carouselImages.style.transform = `translateX(-${index * width}px)`;
+    }
+
+    function nextImage() {
+        const totalImages = document.querySelectorAll('.carousel-images img').length;
+        index = (index + 1) % totalImages;
+        updateCarousel();
+    }
+
+    function prevImage() {
+        const totalImages = document.querySelectorAll('.carousel-images img').length;
+        index = (index - 1 + totalImages) % totalImages;
+        updateCarousel();
+    }
+
+    rightButton.addEventListener('click', nextImage);
+    leftButton.addEventListener('click', prevImage);
+
+    // Auto-slide every 3 seconds
+    setInterval(nextImage, 3000);
+
+    // Resize listener for responsive carousel
+    window.addEventListener('resize', updateCarousel);
+
+    // Initialize carousel on load
+    updateCarousel();
     // Define the pricing for each item
     const pricing = {
         kainBelacuS: 15,
